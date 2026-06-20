@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Půjdeš se mnou na rande?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink-soft:#ffe3ec;
+    --pink:#ff9fc0;
+    --pink-deep:#ff6fa5;
+    --rose:#e8628a;
+    --cream:#fff7f2;
+    --cream-2:#fff0ea;
+    --lilac:#d9a7ff;
+    --lilac-soft:#ece1ff;
+    --ink:#7a4a5e;
+    --ink-soft:#a06d80;
+    --card:#fffdfc;
+    --shadow:0 14px 40px rgba(255,111,165,.22);
+    --shadow-soft:0 8px 24px rgba(255,111,165,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    font-family:'Quicksand',sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    overflow-x:hidden;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #ffd9e6 0%, transparent 55%),
+      radial-gradient(1000px 700px at -10% 110%, #f1dcff 0%, transparent 55%),
+      linear-gradient(160deg,var(--cream) 0%, var(--cream-2) 60%, #ffe9f1 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  }
+
+  /* plovoucí dekorace na pozadí (srdíčka, tlapky, kytky) */
+  .bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+  .bg-deco span{
+    position:absolute;bottom:-40px;font-size:22px;opacity:.5;
+    animation:float-up linear infinite;
+  }
+  @keyframes float-up{
+    0%{transform:translateY(0) rotate(0);opacity:0;}
+    10%{opacity:.55;}
+    90%{opacity:.45;}
+    100%{transform:translateY(-115vh) rotate(40deg);opacity:0;}
+  }
+
+  .stage{position:relative;z-index:1;width:100%;max-width:440px;}
+
+  .card{
+    background:var(--card);
+    border-radius:30px;
+    box-shadow:var(--shadow);
+    padding:34px 26px 32px;
+    border:1px solid rgba(255,159,192,.35);
+    position:relative;
+    overflow:hidden;
+  }
+
+  .screen{display:none;animation:fade-slide .55s cubic-bezier(.2,.7,.2,1);}
+  .screen.active{display:block;}
+  @keyframes fade-slide{
+    0%{opacity:0;transform:translateY(18px) scale(.98);}
+    100%{opacity:1;transform:translateY(0) scale(1);}
+  }
+
+  /* ikona / gif slot v gradientovém čtverci */
+  .icon-tile{
+    width:120px;height:120px;border-radius:28px;margin:0 auto 18px;
+    background:linear-gradient(150deg,#f3a8e0,#c6a8ff);
+    display:flex;align-items:center;justify-content:center;font-size:48px;
+    box-shadow:var(--shadow-soft);position:relative;cursor:pointer;overflow:hidden;
+  }
+  .icon-tile .glabel{
+    position:absolute;left:0;right:0;bottom:0;background:rgba(232,98,138,.85);
+    color:#fff;font-family:'Quicksand';font-weight:600;font-size:12px;text-align:center;padding:4px 0;
+  }
+  .icon-tile input{display:none;}
+  .icon-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+
+  /* kulatá fotka */
+  .photo{
+    width:118px;height:118px;border-radius:50%;
+    margin:0 auto 16px;
+    background:linear-gradient(150deg,#f3a8e0,#c6a8ff);
+    box-shadow:var(--shadow-soft);
+    display:flex;align-items:center;justify-content:center;
+    font-size:46px;cursor:pointer;position:relative;overflow:hidden;
+  }
+  .photo .glabel{
+    position:absolute;left:0;right:0;bottom:0;background:rgba(232,98,138,.85);
+    color:#fff;font-family:'Quicksand';font-weight:600;font-size:12px;text-align:center;padding:4px 0;
+  }
+  .photo input{display:none;}
+  .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+
+  h1{font-family:'Caveat';font-weight:700;font-size:42px;line-height:1.05;text-align:center;color:var(--rose);margin-bottom:6px;}
+  h2{font-family:'Caveat';font-weight:700;font-size:36px;text-align:center;color:var(--rose);margin-bottom:6px;line-height:1.08;}
+  h1.shout{font-size:46px;letter-spacing:.5px;}
+  .sub{text-align:center;color:var(--ink-soft);font-size:15px;margin-bottom:18px;line-height:1.45;}
+
+  /* žádost – gif dlaždice ve stylu index_1 */
+  #s1{position:relative;}
+  .media{
+    position:relative;margin:0 auto 18px;cursor:pointer;border-radius:26px;
+    background:linear-gradient(135deg,var(--pink),var(--lilac));
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+    box-shadow:var(--shadow-soft);transition:transform .25s ease;
+  }
+  .media:hover{transform:scale(1.05) rotate(-2deg);}
+  .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+  .media .glabel{
+    position:absolute;left:0;right:0;bottom:0;background:rgba(232,98,138,.85);
+    color:#fff;font-family:'Quicksand';font-weight:600;font-size:12px;text-align:center;padding:4px 0;
+  }
+  .media input{display:none;}
+  .media-lg{width:120px;height:120px;}
+
+  /* žádost – tlačítka: NE utíká, zmenšuje se, ANO roste (jako index_1) */
+  .ask-buttons{
+    display:flex;gap:14px;justify-content:center;align-items:center;
+    flex-wrap:wrap;margin-top:24px;min-height:62px;
+  }
+  .btn{
+    font-family:'Quicksand';font-weight:700;font-size:16px;border:none;cursor:pointer;
+    padding:14px 30px;border-radius:50px;
+    transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+  }
+  .btn-yes{
+    background:linear-gradient(135deg,var(--pink-deep),var(--lilac));
+    color:#fff;box-shadow:var(--shadow);transform-origin:center;
+  }
+  .btn-yes:hover{filter:brightness(1.05);}
+  .btn-yes:active{filter:brightness(.97);}
+  .btn-no{
+    background:var(--lilac-soft);color:var(--ink-soft);border:2px solid #e3cdff;
+    position:relative;z-index:50;
+  }
+
+  .next{
+    display:block;width:100%;margin-top:24px;
+    font-family:'Quicksand';font-weight:700;font-size:18px;color:#fff;
+    background:linear-gradient(135deg,var(--pink-deep),var(--lilac));
+    border:none;border-radius:30px;padding:16px;cursor:pointer;
+    box-shadow:0 10px 24px rgba(255,111,165,.35);transition:transform .18s ease;
+  }
+  .next:hover{transform:translateY(-2px) scale(1.02);}
+  .next:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+
+  label.fld{display:block;font-family:'Caveat';font-weight:700;color:var(--rose);margin:22px 0 10px;font-size:26px;text-align:center;}
+  .example{font-size:14px;color:var(--ink-soft);margin:2px 0 8px;text-align:center;line-height:1.4;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .tile{
+    background:linear-gradient(160deg,#fff4f8,#ffe6f1);
+    border:1.5px solid var(--pink-soft);border-radius:18px;
+    padding:16px 6px;text-align:center;cursor:pointer;font-weight:600;
+    transition:transform .15s ease, border-color .15s, box-shadow .15s;
+    display:flex;flex-direction:column;align-items:center;gap:8px;min-height:92px;justify-content:center;
+  }
+  .tile .emo{font-size:30px;}
+  .tile .lab{font-size:13px;line-height:1.15;color:var(--ink);}
+  .tile:hover{transform:scale(1.05);border-color:var(--pink);}
+  .tile.sel{background:linear-gradient(135deg,#ffd6ea,#f3c9ff);border-color:var(--pink-deep);box-shadow:var(--shadow-soft);}
+
+  /* den dlaždice (kompaktní, 4 sloupce) */
+  .grid.days{grid-template-columns:repeat(4,1fr);gap:8px;}
+  .grid.days .tile{min-height:0;padding:9px 4px;gap:1px;border-radius:14px;}
+  .grid.days .dn{font-size:14px;font-weight:700;color:var(--ink);}
+  .grid.days .dd{font-size:11px;color:var(--ink-soft);}
+
+  select,input.txt{
+    width:100%;font-family:'Quicksand';font-weight:600;font-size:16px;color:var(--ink);
+    background:#fff;border:1.5px solid var(--pink-soft);border-radius:18px;padding:15px 16px;outline:none;
+    transition:border-color .15s;
+  }
+  select:focus,input.txt:focus{border-color:var(--pink);}
+  input.txt::placeholder{color:#caa6b6;}
+
+  .confirm-text{font-family:'Caveat';font-weight:700;font-size:34px;text-align:center;color:var(--rose);line-height:1.12;margin:4px 0 16px;}
+  .summary{
+    background:linear-gradient(160deg,#fff0f7,#f1e3ff);
+    border:1.5px solid var(--pink-soft);border-radius:22px;
+    padding:18px 18px;text-align:center;font-size:17px;line-height:1.7;color:var(--ink);
+    margin-bottom:16px;
+  }
+  .summary b{color:var(--rose);}
+
+  .burst{position:fixed;z-index:50;font-size:26px;pointer-events:none;animation:burst 1.2s ease-out forwards;}
+  @keyframes burst{
+    0%{transform:translate(0,0) scale(.4);opacity:1;}
+    100%{transform:translate(var(--bx),var(--by)) scale(1.3);opacity:0;}
+  }
+
+  @media (max-width:420px){
+    h1{font-size:36px;} h1.shout{font-size:38px;} h2{font-size:31px;}
+    .card{padding:28px 18px 26px;}
+    .tile .lab{font-size:12px;}
+  }
+</style>
+</head>
+<body>
+<div class="bg-deco" id="bgDeco"></div>
+
+<div class="stage">
+  <div class="card">
+
+    <!-- 1 · ŽÁDOST -->
+    <section class="screen active" id="s1">
+      <label class="media media-lg" id="gif1">
+        <img src="cat-smile.gif" alt="">
+        <span class="glabel" style="display:none;">přidej GIF</span>
+        <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif1')">
+      </label>
+      <h1>🌸 Půjdeš se mnou<br>na rande? 🌸</h1>
+      <div class="ask-buttons" id="askBtns">
+        <button class="btn btn-yes" id="yesBtn" onclick="go('s15')">ANO 💕</button>
+        <button class="btn btn-no" id="noBtn">ne…</button>
+      </div>
+    </section>
+
+    <!-- 1.5 · REAKCE -->
+    <section class="screen" id="s15">
+      <label class="icon-tile" id="gif15">
+        <img src="pokemon-pikachu.gif" alt="">
+        <span class="glabel" style="display:none;">přidej GIF</span>
+        <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif15')">
+      </label>
+      <h1 class="shout">POČKEJ, TY JSI FAKT ŘEKLA ANO??</h1>
+      <div class="sub">a já se už připravoval, že řekneš ne 🙄</div>
+      <button class="next" onclick="go('s2')" style="margin-top:8px;">no dobře, dobře! →</button>
+    </section>
+
+    <!-- 2 · DEN & ČAS -->
+    <section class="screen" id="s2">
+      <div class="icon-tile">📅</div>
+      <h2>takžee… kdy máš čas?</h2>
+      <div class="sub">vyber den, ať to naplánujeme</div>
+
+      <label class="fld">který den?</label>
+      <div class="grid days" id="dayGrid"></div>
+
+      <label class="fld">v kolik?</label>
+      <select id="timeSel">
+        <option value="">vyber čas…</option>
+        <option value="11:00">11:00 — dřív fakt nevstanu 😴</option>
+        <option value="12:00">12:00 — poledne, klidně oběd</option>
+        <option value="13:00">13:00 — pohodový oběd</option>
+        <option value="14:00">14:00 — odpolední klídek</option>
+        <option value="15:00">15:00 — odpolední rande</option>
+        <option value="16:00">16:00 — svačinka a kafe ☕</option>
+        <option value="17:00">17:00 — ještě za světla, kulturně</option>
+        <option value="18:00">18:00 — rozumný člověk</option>
+        <option value="19:00">19:00 — tady bych to viděl já 😏</option>
+        <option value="20:00">20:00 — někdo to rád protáhne</option>
+        <option value="21:00">21:00 — to už mě fakt chceš utahat 😄</option>
+      </select>
+
+      <label class="fld">kde se sejdeme?</label>
+      <div class="example">třeba u metra, tramvaje… klidně tě vyzvednu u tebe</div>
+      <input class="txt" id="placeInp" placeholder="dorazím pro tebe kamkoliv">
+
+      <button class="next" id="next2" onclick="go('s3')" disabled>pokračovat →</button>
+    </section>
+
+    <!-- 3 · AKTIVITA -->
+    <section class="screen" id="s3">
+      <label class="icon-tile" id="gif3">
+        <img src="cat-curious.gif" alt="">
+        <span class="glabel" style="display:none;">přidej GIF</span>
+        <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif3')">
+      </label>
+      <h2>na co máme náladu?</h2>
+      <div class="grid" id="actGrid"></div>
+      <label class="fld">✍️ …nebo něco jiného?</label>
+      <input class="txt" id="actCustom" placeholder="napiš svůj nápad" oninput="onCustomAct()">
+      <button class="next" id="next3" onclick="toConfirm()" disabled>to je ono →</button>
+    </section>
+
+    <!-- 4 · ZÁVĚR -->
+    <section class="screen" id="s4">
+      <label class="icon-tile" id="gif4">
+        <img src="shrek-smile.gif" alt="">
+        <span class="glabel" style="display:none;">přidej GIF</span>
+        <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif4')">
+      </label>
+      <div class="confirm-text" id="confirmText">jsem rád, že jsi neřekla ne 😌</div>
+      <div class="summary" id="summary"></div>
+      <input class="txt" id="msgInp" placeholder="ještě něco, co bych měl vědět? 💌">
+      <button class="next" id="sendBtn" onclick="submitForm()" style="margin-top:16px;">poslat odpověď 💌</button>
+      <div id="sendStatus" style="text-align:center;font-size:14px;font-weight:600;margin-top:10px;min-height:18px;color:var(--ink-soft);"></div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  const state={day:'',time:'',place:'',activity:''};
+
+  /* pozadí: srdíčka, tlapky, kytky */
+  (function(){
+    const wrap=document.getElementById('bgDeco');
+    const emo=['💕','💗','🐾','🐾','🌸','✨','💞','🐾'];
+    for(let i=0;i<18;i++){
+      const s=document.createElement('span');
+      s.textContent=emo[Math.floor(Math.random()*emo.length)];
+      s.style.left=Math.random()*100+'%';
+      s.style.fontSize=(16+Math.random()*16)+'px';
+      s.style.animationDuration=(10+Math.random()*10)+'s';
+      s.style.animationDelay=(-Math.random()*14)+'s';
+      wrap.appendChild(s);
+    }
+  })();
+
+  function go(id){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(id==='s4') heartBurst();
+  }
+
+  function setMedia(input,id){
+    const f=input.files[0];if(!f)return;
+    const url=URL.createObjectURL(f);
+    const box=document.getElementById(id);
+    const lab=box.querySelector('.glabel');
+    box.querySelector('img')&&box.querySelector('img').remove();
+    const img=document.createElement('img');img.src=url;
+    box.insertBefore(img,box.firstChild);
+    if(lab)lab.style.display='none';
+  }
+
+  /* NE utíká, postupně se zmenšuje a ANO roste (jako index_1) */
+  (function(){
+    const noBtn=document.getElementById('noBtn');
+    const yesBtn=document.getElementById('yesBtn');
+    let yesScale=1, noScale=1, dodges=0;
+    function overlap(a,b){return !(a.x+a.w<=b.x||b.x+b.w<=a.x||a.y+a.h<=b.y||b.y+b.h<=a.y);}
+    function dodge(){
+      const card=document.getElementById('s1');
+      const pad=12;
+      noScale=Math.max(0.3, noScale-0.08);
+      noBtn.style.transformOrigin='top left';
+      noBtn.style.transform='scale('+noScale+')';
+      const w=(noBtn.offsetWidth||70)*noScale, h=(noBtn.offsetHeight||44)*noScale;
+      const maxX=Math.max(pad, card.clientWidth - w - pad);
+      const maxY=Math.max(pad, card.clientHeight - h - pad);
+      const cr=card.getBoundingClientRect(), yr=yesBtn.getBoundingClientRect();
+      const yes={x:yr.left-cr.left-10, y:yr.top-cr.top-10, w:yr.width+20, h:yr.height+20};
+      let x,y,tries=0;
+      do{
+        x=pad+Math.random()*(maxX-pad);
+        y=pad+Math.random()*(maxY-pad);
+        tries++;
+      }while(tries<50 && overlap({x,y,w,h},yes));
+      noBtn.style.position='absolute';
+      noBtn.style.left=x+'px';
+      noBtn.style.top=y+'px';
+      yesScale=Math.min(1.5, yesScale+0.07);
+      yesBtn.style.transform='scale('+yesScale+')';
+      dodges++;
+      noBtn.textContent = (dodges>=5 && dodges<7) ? 'ne… 🙈' : 'ne…';
+    }
+    noBtn.addEventListener('mouseover',dodge);
+    noBtn.addEventListener('click',function(e){e.preventDefault();dodge();});
+    noBtn.addEventListener('touchstart',function(e){e.preventDefault();dodge();},{passive:false});
+  })();
+
+  /* dny s reálnými daty */
+  (function(){
+    const dn=['ne','po','út','st','čt','pá','so'];
+    const g=document.getElementById('dayGrid');
+    const today=new Date();
+    for(let i=1;i<=8;i++){
+      const d=new Date(today);d.setDate(today.getDate()+i);
+      const label=dn[d.getDay()];
+      const date=d.getDate()+'.'+(d.getMonth()+1)+'.';
+      const val=label+' '+date;
+      const t=document.createElement('div');
+      t.className='tile';
+      t.innerHTML='<span class="dn">'+label+'</span><span class="dd">'+date+'</span>';
+      t.onclick=()=>{
+        g.querySelectorAll('.tile').forEach(x=>x.classList.remove('sel'));
+        t.classList.add('sel');state.day=val;check2();
+      };
+      g.appendChild(t);
+    }
+  })();
+
+  document.getElementById('timeSel').addEventListener('change',function(){state.time=this.value;check2();});
+  document.getElementById('placeInp').addEventListener('input',function(){state.place=this.value.trim();check2();});
+  function check2(){document.getElementById('next2').disabled=!(state.day&&state.time&&state.place);}
+
+  /* aktivity */
+  (function(){
+    const acts=[
+      {e:'🗼',l:'Petřín'},
+      {e:'⛳',l:'Minigolf'},
+      {e:'☕',l:'Kavárna'},
+      {e:'🚶',l:'Toulky Prahou'},
+      {e:'🎱',l:'Kulečník'},
+      {e:'🧗',l:'Lezení'},
+      {e:'🌳',l:'Park'},
+      {e:'🍦',l:'Zmrzka u řeky'},
+      {e:'✨',l:'Nechám se překvapit'}
+    ];
+    const g=document.getElementById('actGrid');
+    acts.forEach(a=>{
+      const t=document.createElement('div');
+      t.className='tile';
+      t.innerHTML='<span class="emo">'+a.e+'</span><span class="lab">'+a.l+'</span>';
+      t.onclick=()=>{
+        g.querySelectorAll('.tile').forEach(x=>x.classList.remove('sel'));
+        t.classList.add('sel');
+        document.getElementById('actCustom').value='';
+        state.activity=a.l+' '+a.e;check3();
+      };
+      g.appendChild(t);
+    });
+  })();
+  function onCustomAct(){
+    const v=document.getElementById('actCustom').value.trim();
+    if(v){document.getElementById('actGrid').querySelectorAll('.tile').forEach(x=>x.classList.remove('sel'));state.activity=v;}
+    else{state.activity='';}
+    check3();
+  }
+  function check3(){document.getElementById('next3').disabled=!state.activity;}
+
+  function toConfirm(){
+    document.getElementById('confirmText').innerHTML=
+      'jsem rád, že jsi neřekla ne 😌<br>buď ready v <b>'+escapeHtml(state.time)+'</b>, už se těším ✨';
+    document.getElementById('summary').innerHTML=
+      '📓 <b>'+escapeHtml(state.day)+'</b> v <b>'+escapeHtml(state.time)+'</b><br>'+
+      '🎈 jdeme na <b>'+escapeHtml(state.activity)+'</b>';
+    go('s4');
+  }
+  function escapeHtml(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+  /* odeslání odpovědi na Formspree -> přijde Adamovi na mail */
+  const FORMSPREE_URL="https://formspree.io/f/mnjyznpn";
+  async function submitForm(){
+    const btn=document.getElementById('sendBtn');
+    const st=document.getElementById('sendStatus');
+    const payload={
+      "den": state.day,
+      "čas": state.time,
+      "kde se sejdeme": state.place || "(nevyplněno)",
+      "aktivita": state.activity,
+      "vzkaz": document.getElementById('msgInp').value.trim() || "(žádný)",
+      "_subject": "💗 Řekla ANO – máte rande!"
+    };
+    btn.disabled=true;
+    st.style.color="var(--ink-soft)";
+    st.textContent="posílám…";
+    try{
+      const r=await fetch(FORMSPREE_URL,{
+        method:"POST",
+        headers:{"Content-Type":"application/json","Accept":"application/json"},
+        body:JSON.stringify(payload)
+      });
+      if(r.ok){
+        st.style.color="var(--rose)";
+        st.textContent="odesláno 💌 brzy se ozve!";
+        btn.textContent="hotovo ✨";
+        heartBurst();
+      }else{
+        st.style.color="#c0392b";
+        st.textContent="hups, nepovedlo se odeslat – zkus to znovu";
+        btn.disabled=false;
+      }
+    }catch(e){
+      st.style.color="#c0392b";
+      st.textContent="bez internetu to nepošlu – zkontroluj připojení";
+      btn.disabled=false;
+    }
+  }
+
+  function heartBurst(){
+    const emojis=['💕','💗','💖','✨','🌸','💞'];
+    for(let i=0;i<26;i++){
+      const b=document.createElement('div');
+      b.className='burst';
+      b.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+      b.style.left=(40+Math.random()*20)+'%';
+      b.style.top='40%';
+      b.style.setProperty('--bx',(Math.random()*420-210)+'px');
+      b.style.setProperty('--by',(Math.random()*-320-60)+'px');
+      document.body.appendChild(b);
+      setTimeout(()=>b.remove(),1200);
+    }
+  }
+</script>
+</body>
+</html>
