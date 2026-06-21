@@ -39,7 +39,6 @@
     justify-content:center;
     padding:20px;
   }
-
   .bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
   .bg-deco span{
     position:absolute;bottom:-40px;font-size:22px;opacity:.5;
@@ -51,9 +50,7 @@
     90%{opacity:.45;}
     100%{transform:translateY(-115vh) rotate(40deg);opacity:0;}
   }
-
   .stage{position:relative;z-index:1;width:100%;max-width:440px;}
-
   .card{
     background:var(--card);
     border-radius:30px;
@@ -63,14 +60,12 @@
     position:relative;
     overflow:hidden;
   }
-
   .screen{display:none;animation:fade-slide .55s cubic-bezier(.2,.7,.2,1);}
   .screen.active{display:block;}
   @keyframes fade-slide{
     0%{opacity:0;transform:translateY(18px) scale(.98);}
     100%{opacity:1;transform:translateY(0) scale(1);}
   }
-
   .icon-tile{
     width:120px;height:120px;border-radius:28px;margin:0 auto 18px;
     background:linear-gradient(150deg,#f3a8e0,#c6a8ff);
@@ -83,7 +78,6 @@
   }
   .icon-tile input{display:none;}
   .icon-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-
   .photo{
     width:118px;height:118px;border-radius:50%;
     margin:0 auto 16px;
@@ -98,12 +92,10 @@
   }
   .photo input{display:none;}
   .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-
   h1{font-family:'Caveat';font-weight:700;font-size:42px;line-height:1.05;text-align:center;color:var(--rose);margin-bottom:6px;}
   h2{font-family:'Caveat';font-weight:700;font-size:36px;text-align:center;color:var(--rose);margin-bottom:6px;line-height:1.08;}
   h1.shout{font-size:46px;letter-spacing:.5px;}
   .sub{text-align:center;color:var(--ink-soft);font-size:15px;margin-bottom:18px;line-height:1.45;}
-
   #s1{position:relative;}
   .media{
     position:relative;margin:0 auto 18px;cursor:pointer;border-radius:26px;
@@ -119,7 +111,6 @@
   }
   .media input{display:none;}
   .media-lg{width:120px;height:120px;}
-
   .ask-buttons{
     display:flex;gap:14px;justify-content:center;align-items:center;
     flex-wrap:wrap;margin-top:24px;min-height:62px;
@@ -139,7 +130,6 @@
     background:var(--lilac-soft);color:var(--ink-soft);border:2px solid #e3cdff;
     position:relative;z-index:50;
   }
-
   .next{
     display:block;width:100%;margin-top:24px;
     font-family:'Quicksand';font-weight:700;font-size:18px;color:#fff;
@@ -149,10 +139,8 @@
   }
   .next:hover{transform:translateY(-2px) scale(1.02);}
   .next:disabled{opacity:.45;cursor:not-allowed;transform:none;}
-
   label.fld{display:block;font-family:'Caveat';font-weight:700;color:var(--rose);margin:22px 0 10px;font-size:26px;text-align:center;}
   .example{font-size:14px;color:var(--ink-soft);margin:2px 0 8px;text-align:center;line-height:1.4;}
-
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
   .tile{
     background:linear-gradient(160deg,#fff4f8,#ffe6f1);
@@ -165,12 +153,10 @@
   .tile .lab{font-size:13px;line-height:1.15;color:var(--ink);}
   .tile:hover{transform:scale(1.05);border-color:var(--pink);}
   .tile.sel{background:linear-gradient(135deg,#ffd6ea,#f3c9ff);border-color:var(--pink-deep);box-shadow:var(--shadow-soft);}
-
   .grid.days{grid-template-columns:repeat(4,1fr);gap:8px;}
   .grid.days .tile{min-height:0;padding:9px 4px;gap:1px;border-radius:14px;}
   .grid.days .dn{font-size:14px;font-weight:700;color:var(--ink);}
   .grid.days .dd{font-size:11px;color:var(--ink-soft);}
-
   select,input.txt{
     width:100%;font-family:'Quicksand';font-weight:600;font-size:16px;color:var(--ink);
     background:#fff;border:1.5px solid var(--pink-soft);border-radius:18px;padding:15px 16px;outline:none;
@@ -178,7 +164,6 @@
   }
   select:focus,input.txt:focus{border-color:var(--pink);}
   input.txt::placeholder{color:#caa6b6;}
-
   .confirm-text{font-family:'Caveat';font-weight:700;font-size:34px;text-align:center;color:var(--rose);line-height:1.12;margin:4px 0 16px;}
   .summary{
     background:linear-gradient(160deg,#fff0f7,#f1e3ff);
@@ -187,13 +172,11 @@
     margin-bottom:16px;
   }
   .summary b{color:var(--rose);}
-
   .burst{position:fixed;z-index:50;font-size:26px;pointer-events:none;animation:burst 1.2s ease-out forwards;}
   @keyframes burst{
     0%{transform:translate(0,0) scale(.4);opacity:1;}
     100%{transform:translate(var(--bx),var(--by)) scale(1.3);opacity:0;}
   }
-
   @media (max-width:420px){
     h1{font-size:36px;} h1.shout{font-size:38px;} h2{font-size:31px;}
     .card{padding:28px 18px 26px;}
@@ -203,10 +186,8 @@
 </head>
 <body>
 <div class="bg-deco" id="bgDeco"></div>
-
 <div class="stage">
   <div class="card">
-
     <!-- 1 · ŽÁDOST -->
     <section class="screen active" id="s1">
       <label class="media media-lg" id="gif1">
@@ -220,7 +201,6 @@
         <button class="btn btn-no" id="noBtn">ne…</button>
       </div>
     </section>
-
     <!-- 1.5 · REAKCE -->
     <section class="screen" id="s15">
       <label class="icon-tile" id="gif15">
@@ -229,10 +209,9 @@
         <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif15')">
       </label>
       <h1 class="shout">POČKEJ, TY JSI FAKT ŘEKLA ANO??</h1>
-      <div class="sub">a já se už připravoval, že řekneš ne 🙄</div>
+      <div class="sub">a já se už připravoval, že řekneš ne 🫢</div>
       <button class="next" onclick="go('s2')" style="margin-top:8px;">no dobře, dobře! →</button>
     </section>
-
     <!-- 2 · DEN & ČAS -->
     <section class="screen" id="s2">
       <label class="icon-tile" id="gif2">
@@ -242,10 +221,8 @@
       </label>
       <h2>takžee… kdy máš čas?</h2>
       <div class="sub">vyber den, ať to naplánujeme</div>
-
       <label class="fld">který den?</label>
       <div class="grid days" id="dayGrid"></div>
-
       <label class="fld">v kolik?</label>
       <select id="timeSel">
         <option value="">vyber čas…</option>
@@ -261,14 +238,11 @@
         <option value="20:00">20:00 — někdo to rád protáhne</option>
         <option value="21:00">21:00 — že by dlouhá noc?</option>
       </select>
-
       <label class="fld">kde se sejdeme?</label>
       <div class="example">třeba u metra, tramvaje… klidně tě vyzvednu u tebe</div>
       <input class="txt" id="placeInp" placeholder="dorazím pro tebe kamkoliv">
-
       <button class="next" id="next2" onclick="go('s3')" disabled>pokračovat →</button>
     </section>
-
     <!-- 3 · AKTIVITA -->
     <section class="screen" id="s3">
       <label class="icon-tile" id="gif3">
@@ -282,7 +256,6 @@
       <input class="txt" id="actCustom" placeholder="napiš svůj nápad" oninput="onCustomAct()">
       <button class="next" id="next3" onclick="toConfirm()" disabled>to je ono →</button>
     </section>
-
     <!-- 4 · ZÁVĚR -->
     <section class="screen" id="s4">
       <label class="icon-tile" id="gif4">
@@ -290,22 +263,20 @@
         <span class="glabel" style="display:none;">přidej GIF</span>
         <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif4')">
       </label>
-      <div class="confirm-text" id="confirmText">jsem rád, že jsi neřekla ne 🫢</div>
+      <div class="confirm-text" id="confirmText">jsem rád, že jsi neřekla ne..</div>
       <div class="summary" id="summary"></div>
       <input class="txt" id="msgInp" placeholder="ještě něco, co bych měl vědět? 💌">
       <button class="next" id="sendBtn" onclick="submitForm()" style="margin-top:16px;">poslat odpověď 💌</button>
       <div id="sendStatus" style="text-align:center;font-size:14px;font-weight:600;margin-top:10px;min-height:18px;color:var(--ink-soft);"></div>
     </section>
-
   </div>
 </div>
-
 <script>
   const state={day:'',time:'',place:'',activity:''};
 
   (function(){
     const wrap=document.getElementById('bgDeco');
-    const emo=['💕','💗','🐾','🐾','🌸','✨','💞','🐾'];
+    const emo=['💕','💗','🐾','❤️','🌸','✨','💞','🐾'];
     for(let i=0;i<18;i++){
       const s=document.createElement('span');
       s.textContent=emo[Math.floor(Math.random()*emo.length)];
@@ -335,13 +306,17 @@
     if(lab)lab.style.display='none';
   }
 
-  /* NE utíká, postupně se zmenšuje a ANO roste */
+  /* NE utíká — aktivuje se až po 1.5s od načtení stránky */
   (function(){
     const noBtn=document.getElementById('noBtn');
     const yesBtn=document.getElementById('yesBtn');
     let yesScale=1, noScale=1, dodges=0;
+    let ready=false;
+    setTimeout(()=>{ ready=true; }, 800);
+
     function overlap(a,b){return !(a.x+a.w<=b.x||b.x+b.w<=a.x||a.y+a.h<=b.y||b.y+b.h<=a.y);}
     function dodge(){
+      if(!ready) return;
       const card=document.getElementById('s1');
       const pad=12;
       noScale=Math.max(0.3, noScale-0.08);
@@ -395,18 +370,22 @@
   document.getElementById('placeInp').addEventListener('input',function(){state.place=this.value.trim();check2();});
   function check2(){document.getElementById('next2').disabled=!(state.day&&state.time&&state.place);}
 
+  const acts=[
+    {e:'🎬',l:'Kino'},
+    {e:'⛳',l:'Minigolf'},
+    {e:'☕',l:'Kavárna'},
+    {e:'🚶',l:'Toulání Prahou'},
+    {e:'🎱',l:'Kulečník'},
+    {e:'🧗',l:'Lezení'},
+    {e:'🌳',l:'Chození po parku'},
+    {e:'🍹',l:'Zajít na drink'},
+    {e:'🛶',l:'Šlapadlo'},
+    {e:'🔐',l:'Únikovka'},
+    {e:'🌅',l:'Vylézt někam za západem slunce'},
+    {e:'✨',l:'Nechám se překvapit'}
+  ];
+
   (function(){
-    const acts=[
-      {e:'🗼',l:'Petřín'},
-      {e:'⛳',l:'Minigolf'},
-      {e:'☕',l:'Kavárna'},
-      {e:'🚶',l:'Toulky Prahou'},
-      {e:'🎱',l:'Kulečník'},
-      {e:'🧗',l:'Lezení'},
-      {e:'🌳',l:'Park'},
-      {e:'🍦',l:'Zmrzka u řeky'},
-      {e:'✨',l:'Nechám se překvapit'}
-    ];
     const g=document.getElementById('actGrid');
     acts.forEach(a=>{
       const t=document.createElement('div');
@@ -416,15 +395,21 @@
         g.querySelectorAll('.tile').forEach(x=>x.classList.remove('sel'));
         t.classList.add('sel');
         document.getElementById('actCustom').value='';
-        state.activity=a.l+' '+a.e;check3();
+        state.activity=a.l+' '+a.e;
+        check3();
       };
       g.appendChild(t);
     });
   })();
+
   function onCustomAct(){
     const v=document.getElementById('actCustom').value.trim();
-    if(v){document.getElementById('actGrid').querySelectorAll('.tile').forEach(x=>x.classList.remove('sel'));state.activity=v;}
-    else{state.activity='';}
+    if(v){
+      document.getElementById('actGrid').querySelectorAll('.tile').forEach(x=>x.classList.remove('sel'));
+      state.activity=v;
+    } else {
+      state.activity='';
+    }
     check3();
   }
   function check3(){document.getElementById('next3').disabled=!state.activity;}
