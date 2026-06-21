@@ -232,15 +232,15 @@
         <option value="14:00">14:00 — nějaký desert po obědě?</option>
         <option value="15:00">15:00 — odpolední rande</option>
         <option value="16:00">16:00 — snack a kafe</option>
-        <option value="17:00">17:00 — ještě za světla, kulturně</option>
-        <option value="18:00">18:00 — rozumný člověk</option>
+        <option value="17:00">17:00 — ještě za světla</option>
+        <option value="18:00">18:00 — to se stihnu možná i naobědvat</option>
         <option value="19:00">19:00 — pozorovat západ slunce?</option>
         <option value="20:00">20:00 — někdo to rád protáhne</option>
         <option value="21:00">21:00 — že by dlouhá noc?</option>
       </select>
       <label class="fld">kde se sejdeme?</label>
       <div class="example">třeba u metra, tramvaje… klidně tě vyzvednu u tebe</div>
-      <input class="txt" id="placeInp" placeholder="dorazím pro tebe kamkoliv">
+      <input class="txt" id="placeInp" placeholder="dorazím pro tebe kamkoliv 👀">
       <button class="next" id="next2" onclick="go('s3')" disabled>pokračovat →</button>
     </section>
     <!-- 3 · AKTIVITA -->
@@ -265,7 +265,7 @@
       </label>
       <div class="confirm-text" id="confirmText">jsem rád, že jsi neřekla ne..</div>
       <div class="summary" id="summary"></div>
-      <input class="txt" id="msgInp" placeholder="ještě něco, co bych měl vědět? 💌">
+      <input class="txt" id="msgInp" placeholder="ještě něco, co bych měl vědět?">
       <button class="next" id="sendBtn" onclick="submitForm()" style="margin-top:16px;">poslat odpověď 💌</button>
       <div id="sendStatus" style="text-align:center;font-size:14px;font-weight:600;margin-top:10px;min-height:18px;color:var(--ink-soft);"></div>
     </section>
@@ -273,6 +273,7 @@
 </div>
 <script>
   const state={day:'',time:'',place:'',activity:''};
+  const TEST_MODE = true; // true = testování, false = ostrý provoz
 
   (function(){
     const wrap=document.getElementById('bgDeco');
@@ -416,7 +417,7 @@
 
   function toConfirm(){
     document.getElementById('confirmText').innerHTML=
-      'jsem rád, že jsi neřekla ne 🫢<br>buď ready v <b>'+escapeHtml(state.time)+'</b>, už se těším ✨';
+      'jsem rád, že jsi neřekla ne.<br>buď ready v <b>'+escapeHtml(state.time)+'</b>, už se těším ✨';
     document.getElementById('summary').innerHTML=
       '📓 <b>'+escapeHtml(state.day)+'</b> v <b>'+escapeHtml(state.time)+'</b><br>'+
       '🎈 jdeme na <b>'+escapeHtml(state.activity)+'</b>';
@@ -439,6 +440,15 @@
     btn.disabled=true;
     st.style.color="var(--ink-soft)";
     st.textContent="posílám…";
+    if(TEST_MODE){
+      setTimeout(()=>{
+        st.style.color="var(--rose)";
+        st.textContent="odesláno 💌 brzy se ozvu! (test)";
+        btn.textContent="hotovo ✨";
+        heartBurst();
+      }, 800);
+      return;
+    }
     try{
       const r=await fetch(FORMSPREE_URL,{
         method:"POST",
@@ -463,7 +473,7 @@
   }
 
   function heartBurst(){
-    const emojis=['💕','💗','💖','✨','🌸','💞'];
+    const emojis=['💕','💗','🐾','💖','✨','🌸','💞'];
     for(let i=0;i<26;i++){
       const b=document.createElement('div');
       b.className='burst';
