@@ -40,7 +40,6 @@
     padding:20px;
   }
 
-  /* plovoucí dekorace na pozadí (srdíčka, tlapky, kytky) */
   .bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
   .bg-deco span{
     position:absolute;bottom:-40px;font-size:22px;opacity:.5;
@@ -72,7 +71,6 @@
     100%{opacity:1;transform:translateY(0) scale(1);}
   }
 
-  /* ikona / gif slot v gradientovém čtverci */
   .icon-tile{
     width:120px;height:120px;border-radius:28px;margin:0 auto 18px;
     background:linear-gradient(150deg,#f3a8e0,#c6a8ff);
@@ -86,7 +84,6 @@
   .icon-tile input{display:none;}
   .icon-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 
-  /* kulatá fotka */
   .photo{
     width:118px;height:118px;border-radius:50%;
     margin:0 auto 16px;
@@ -107,7 +104,6 @@
   h1.shout{font-size:46px;letter-spacing:.5px;}
   .sub{text-align:center;color:var(--ink-soft);font-size:15px;margin-bottom:18px;line-height:1.45;}
 
-  /* žádost – gif dlaždice ve stylu index_1 */
   #s1{position:relative;}
   .media{
     position:relative;margin:0 auto 18px;cursor:pointer;border-radius:26px;
@@ -124,7 +120,6 @@
   .media input{display:none;}
   .media-lg{width:120px;height:120px;}
 
-  /* žádost – tlačítka: NE utíká, zmenšuje se, ANO roste (jako index_1) */
   .ask-buttons{
     display:flex;gap:14px;justify-content:center;align-items:center;
     flex-wrap:wrap;margin-top:24px;min-height:62px;
@@ -171,7 +166,6 @@
   .tile:hover{transform:scale(1.05);border-color:var(--pink);}
   .tile.sel{background:linear-gradient(135deg,#ffd6ea,#f3c9ff);border-color:var(--pink-deep);box-shadow:var(--shadow-soft);}
 
-  /* den dlaždice (kompaktní, 4 sloupce) */
   .grid.days{grid-template-columns:repeat(4,1fr);gap:8px;}
   .grid.days .tile{min-height:0;padding:9px 4px;gap:1px;border-radius:14px;}
   .grid.days .dn{font-size:14px;font-weight:700;color:var(--ink);}
@@ -216,7 +210,7 @@
     <!-- 1 · ŽÁDOST -->
     <section class="screen active" id="s1">
       <label class="media media-lg" id="gif1">
-        <img src="cat-smile.gif" alt="">
+        <img src="pic_1.gif" alt="">
         <span class="glabel" style="display:none;">přidej GIF</span>
         <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif1')">
       </label>
@@ -230,18 +224,22 @@
     <!-- 1.5 · REAKCE -->
     <section class="screen" id="s15">
       <label class="icon-tile" id="gif15">
-        <img src="pokemon-pikachu.gif" alt="">
+        <img src="pic_2.gif" alt="">
         <span class="glabel" style="display:none;">přidej GIF</span>
         <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif15')">
       </label>
       <h1 class="shout">POČKEJ, TY JSI FAKT ŘEKLA ANO??</h1>
-      <div class="sub">a já se už připravoval, že řekneš ne 🫢</div>
+      <div class="sub">a já se už připravoval, že řekneš ne 🙄</div>
       <button class="next" onclick="go('s2')" style="margin-top:8px;">no dobře, dobře! →</button>
     </section>
 
     <!-- 2 · DEN & ČAS -->
     <section class="screen" id="s2">
-      <div class="icon-tile">📅</div>
+      <label class="icon-tile" id="gif2">
+        <img src="pic_3.gif" alt="">
+        <span class="glabel" style="display:none;">přidej GIF</span>
+        <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif2')">
+      </label>
       <h2>takžee… kdy máš čas?</h2>
       <div class="sub">vyber den, ať to naplánujeme</div>
 
@@ -254,19 +252,19 @@
         <option value="11:00">11:00 — dřív fakt nevstanu</option>
         <option value="12:00">12:00 — brzký oběd/moje snídaně</option>
         <option value="13:00">13:00 — pohodový oběd</option>
-        <option value="14:00">14:00 — nějaký desert po o?</option>
+        <option value="14:00">14:00 — nějaký desert po obědě?</option>
         <option value="15:00">15:00 — odpolední rande</option>
         <option value="16:00">16:00 — snack a kafe</option>
         <option value="17:00">17:00 — ještě za světla, kulturně</option>
         <option value="18:00">18:00 — rozumný člověk</option>
-        <option value="19:00">19:00 — pozorovat západ slunce? </option>
+        <option value="19:00">19:00 — pozorovat západ slunce?</option>
         <option value="20:00">20:00 — někdo to rád protáhne</option>
         <option value="21:00">21:00 — že by dlouhá noc?</option>
       </select>
 
       <label class="fld">kde se sejdeme?</label>
       <div class="example">třeba u metra, tramvaje… klidně tě vyzvednu u tebe</div>
-      <input class="txt" id="placeInp" placeholder="dorazím pro tebe kamkoliv 👀">
+      <input class="txt" id="placeInp" placeholder="dorazím pro tebe kamkoliv">
 
       <button class="next" id="next2" onclick="go('s3')" disabled>pokračovat →</button>
     </section>
@@ -274,7 +272,7 @@
     <!-- 3 · AKTIVITA -->
     <section class="screen" id="s3">
       <label class="icon-tile" id="gif3">
-        <img src="cat-curious.gif" alt="">
+        <img src="pic_4.gif" alt="">
         <span class="glabel" style="display:none;">přidej GIF</span>
         <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif3')">
       </label>
@@ -288,13 +286,13 @@
     <!-- 4 · ZÁVĚR -->
     <section class="screen" id="s4">
       <label class="icon-tile" id="gif4">
-        <img src="shrek-smile.gif" alt="">
+        <img src="pic_5.gif" alt="">
         <span class="glabel" style="display:none;">přidej GIF</span>
         <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif4')">
       </label>
-      <div class="confirm-text" id="confirmText">jsem rád, že jsi neřekla ne </div>
+      <div class="confirm-text" id="confirmText">jsem rád, že jsi neřekla ne 🫢</div>
       <div class="summary" id="summary"></div>
-      <input class="txt" id="msgInp" placeholder="ještě něco, co bych měl vědět?">
+      <input class="txt" id="msgInp" placeholder="ještě něco, co bych měl vědět? 💌">
       <button class="next" id="sendBtn" onclick="submitForm()" style="margin-top:16px;">poslat odpověď 💌</button>
       <div id="sendStatus" style="text-align:center;font-size:14px;font-weight:600;margin-top:10px;min-height:18px;color:var(--ink-soft);"></div>
     </section>
@@ -305,7 +303,6 @@
 <script>
   const state={day:'',time:'',place:'',activity:''};
 
-  /* pozadí: srdíčka, tlapky, kytky */
   (function(){
     const wrap=document.getElementById('bgDeco');
     const emo=['💕','💗','🐾','🐾','🌸','✨','💞','🐾'];
@@ -338,7 +335,7 @@
     if(lab)lab.style.display='none';
   }
 
-  /* NE utíká, postupně se zmenšuje a ANO roste (jako index_1) */
+  /* NE utíká, postupně se zmenšuje a ANO roste */
   (function(){
     const noBtn=document.getElementById('noBtn');
     const yesBtn=document.getElementById('yesBtn');
@@ -374,7 +371,6 @@
     noBtn.addEventListener('touchstart',function(e){e.preventDefault();dodge();},{passive:false});
   })();
 
-  /* dny s reálnými daty */
   (function(){
     const dn=['ne','po','út','st','čt','pá','so'];
     const g=document.getElementById('dayGrid');
@@ -399,7 +395,6 @@
   document.getElementById('placeInp').addEventListener('input',function(){state.place=this.value.trim();check2();});
   function check2(){document.getElementById('next2').disabled=!(state.day&&state.time&&state.place);}
 
-  /* aktivity */
   (function(){
     const acts=[
       {e:'🗼',l:'Petřín'},
@@ -436,15 +431,14 @@
 
   function toConfirm(){
     document.getElementById('confirmText').innerHTML=
-      'jsem rád, že jsi neřekla ne <br>buď ready v <b>'+escapeHtml(state.time)+'</b>, už se těším ✨';
+      'jsem rád, že jsi neřekla ne 🫢<br>buď ready v <b>'+escapeHtml(state.time)+'</b>, už se těším ✨';
     document.getElementById('summary').innerHTML=
-      '📅 <b>'+escapeHtml(state.day)+'</b> v <b>'+escapeHtml(state.time)+'</b><br>'+
-      'v plánu je <b>'+escapeHtml(state.activity)+'</b>';
+      '📓 <b>'+escapeHtml(state.day)+'</b> v <b>'+escapeHtml(state.time)+'</b><br>'+
+      '🎈 jdeme na <b>'+escapeHtml(state.activity)+'</b>';
     go('s4');
   }
   function escapeHtml(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
-  /* odeslání odpovědi na Formspree -> přijde Adamovi na mail */
   const FORMSPREE_URL="https://formspree.io/f/mnjyznpn";
   async function submitForm(){
     const btn=document.getElementById('sendBtn');
