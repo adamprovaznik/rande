@@ -419,8 +419,8 @@
     document.getElementById('confirmText').innerHTML=
       'jsem rád, že jsi neřekla ne.<br>buď ready v <b>'+escapeHtml(state.time)+'</b>, už se těším ✨';
     document.getElementById('summary').innerHTML=
-      '📓 <b>'+escapeHtml(state.day)+'</b> v <b>'+escapeHtml(state.time)+'</b><br>'+
-      '🎈 jdeme na <b>'+escapeHtml(state.activity)+'</b>';
+      '🗓️ <b>'+escapeHtml(state.day)+'</b> v <b>'+escapeHtml(state.time)+'</b><br>'+
+      'v plánu je <b>'+escapeHtml(state.activity)+'</b>';
     go('s4');
   }
   function escapeHtml(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
