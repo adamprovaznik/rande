@@ -274,7 +274,7 @@
 </div>
 <script>
   const state={day:'',time:'',place:'',activity:''};
-  const TEST_MODE = true; // true = testování, false = ostrý provoz
+  const TEST_MODE = false; // true = testování, false = ostrý provoz
 
   (function(){
     const wrap=document.getElementById('bgDeco');
@@ -314,7 +314,7 @@
     const yesBtn=document.getElementById('yesBtn');
     let yesScale=1, noScale=1, dodges=0;
     let ready=false;
-    setTimeout(()=>{ ready=true; }, 1500);
+    setTimeout(()=>{ ready=true; }, 1000);
 
     function overlap(a,b){return !(a.x+a.w<=b.x||b.x+b.w<=a.x||a.y+a.h<=b.y||b.y+b.h<=a.y);}
     function dodge(){
@@ -376,11 +376,11 @@
     {e:'🎬',l:'Kino'},
     {e:'⛳',l:'Minigolf'},
     {e:'☕',l:'Kavárna'},
-    {e:'🚶',l:'Toulky Prahou'},
+    {e:'🚶',l:'Toulání Prahou'},
     {e:'🎱',l:'Kulečník'},
     {e:'🧗',l:'Lezení'},
     {e:'🌳',l:'Chození po parku'},
-    {e:'🍻',l:'Dát si drink'},
+    {e:'🍹',l:'Zajít na drink'},
     {e:'🛶',l:'Šlapadlo'},
     {e:'🔐',l:'Únikovka'},
     {e:'🌅',l:'Vylézt někam za západem slunce'},
