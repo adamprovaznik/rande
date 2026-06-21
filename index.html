@@ -29,13 +29,14 @@
     font-family:'Quicksand',sans-serif;
     color:var(--ink);
     min-height:100vh;
+    min-height:100dvh;
     overflow-x:hidden;
     background:
       radial-gradient(1200px 600px at 80% -10%, #ffd9e6 0%, transparent 55%),
       radial-gradient(1000px 700px at -10% 110%, #f1dcff 0%, transparent 55%),
       linear-gradient(160deg,var(--cream) 0%, var(--cream-2) 60%, #ffe9f1 100%);
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     justify-content:center;
     padding:20px;
   }
@@ -50,7 +51,7 @@
     90%{opacity:.45;}
     100%{transform:translateY(-115vh) rotate(40deg);opacity:0;}
   }
-  .stage{position:relative;z-index:1;width:100%;max-width:440px;}
+  .stage{position:relative;z-index:1;width:100%;max-width:440px;margin-top:auto;margin-bottom:auto;}
   .card{
     background:var(--card);
     border-radius:30px;
@@ -220,7 +221,7 @@
         <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif2')">
       </label>
       <h2>takžee… kdy máš čas?</h2>
-      <div class="sub">vyber den, ať to naplánujeme</div>
+      <div class="sub"></div>
       <label class="fld">který den?</label>
       <div class="grid days" id="dayGrid"></div>
       <label class="fld">v kolik?</label>
@@ -232,15 +233,15 @@
         <option value="14:00">14:00 — nějaký desert po obědě?</option>
         <option value="15:00">15:00 — odpolední rande</option>
         <option value="16:00">16:00 — snack a kafe</option>
-        <option value="17:00">17:00 — ještě za světla</option>
-        <option value="18:00">18:00 — to se stihnu možná i naobědvat</option>
+        <option value="17:00">17:00 — ještě za světla, kulturně</option>
+        <option value="18:00">18:00 — rozumný člověk</option>
         <option value="19:00">19:00 — pozorovat západ slunce?</option>
         <option value="20:00">20:00 — někdo to rád protáhne</option>
         <option value="21:00">21:00 — že by dlouhá noc?</option>
       </select>
       <label class="fld">kde se sejdeme?</label>
       <div class="example">třeba u metra, tramvaje… klidně tě vyzvednu u tebe</div>
-      <input class="txt" id="placeInp" placeholder="dorazím pro tebe kamkoliv 👀">
+      <input class="txt" id="placeInp" placeholder="dorazím pro tebe kamkoliv">
       <button class="next" id="next2" onclick="go('s3')" disabled>pokračovat →</button>
     </section>
     <!-- 3 · AKTIVITA -->
@@ -313,7 +314,7 @@
     const yesBtn=document.getElementById('yesBtn');
     let yesScale=1, noScale=1, dodges=0;
     let ready=false;
-    setTimeout(()=>{ ready=true; }, 800);
+    setTimeout(()=>{ ready=true; }, 1500);
 
     function overlap(a,b){return !(a.x+a.w<=b.x||b.x+b.w<=a.x||a.y+a.h<=b.y||b.y+b.h<=a.y);}
     function dodge(){
@@ -369,17 +370,17 @@
 
   document.getElementById('timeSel').addEventListener('change',function(){state.time=this.value;check2();});
   document.getElementById('placeInp').addEventListener('input',function(){state.place=this.value.trim();check2();});
-  function check2(){document.getElementById('next2').disabled=!(state.day&&state.time&&state.place);}
+  function check2(){document.getElementById('next2').disabled=!(state.day&&state.time);}
 
   const acts=[
     {e:'🎬',l:'Kino'},
     {e:'⛳',l:'Minigolf'},
     {e:'☕',l:'Kavárna'},
-    {e:'🚶',l:'Toulání Prahou'},
+    {e:'🚶',l:'Toulky Prahou'},
     {e:'🎱',l:'Kulečník'},
     {e:'🧗',l:'Lezení'},
     {e:'🌳',l:'Chození po parku'},
-    {e:'🍹',l:'Zajít na drink'},
+    {e:'🍻',l:'Dát si drink'},
     {e:'🛶',l:'Šlapadlo'},
     {e:'🔐',l:'Únikovka'},
     {e:'🌅',l:'Vylézt někam za západem slunce'},
@@ -417,9 +418,9 @@
 
   function toConfirm(){
     document.getElementById('confirmText').innerHTML=
-      'jsem rád, že jsi neřekla ne.<br>buď ready v <b>'+escapeHtml(state.time)+'</b>, už se těším ✨';
+      'jsem rád, že jsi neřekla ne.<br>buď ready v <b>'+escapeHtml(state.time)+'</b>, už se těším';
     document.getElementById('summary').innerHTML=
-      '🗓️ <b>'+escapeHtml(state.day)+'</b> v <b>'+escapeHtml(state.time)+'</b><br>'+
+      '📅 <b>'+escapeHtml(state.day)+'</b> v <b>'+escapeHtml(state.time)+'</b><br>'+
       'v plánu je <b>'+escapeHtml(state.activity)+'</b>';
     go('s4');
   }
@@ -473,7 +474,7 @@
   }
 
   function heartBurst(){
-    const emojis=['💕','💗','🐾','💖','✨','🌸','💞'];
+    const emojis=['💕','💗','💖','✨','🌸','💞'];
     for(let i=0;i<26;i++){
       const b=document.createElement('div');
       b.className='burst';
