@@ -235,7 +235,7 @@
         <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif15')">
       </label>
       <h1 class="shout">POČKEJ, TY JSI FAKT ŘEKLA ANO??</h1>
-      <div class="sub">a já se už připravoval, že řekneš ne 🙄</div>
+      <div class="sub">a já se už připravoval, že řekneš ne 🫢</div>
       <button class="next" onclick="go('s2')" style="margin-top:8px;">no dobře, dobře! →</button>
     </section>
 
@@ -251,17 +251,17 @@
       <label class="fld">v kolik?</label>
       <select id="timeSel">
         <option value="">vyber čas…</option>
-        <option value="11:00">11:00 — dřív fakt nevstanu 😴</option>
-        <option value="12:00">12:00 — poledne, klidně oběd</option>
+        <option value="11:00">11:00 — dřív fakt nevstanu</option>
+        <option value="12:00">12:00 — brzký oběd/moje snídaně</option>
         <option value="13:00">13:00 — pohodový oběd</option>
-        <option value="14:00">14:00 — odpolední klídek</option>
+        <option value="14:00">14:00 — nějaký desert po o?</option>
         <option value="15:00">15:00 — odpolední rande</option>
-        <option value="16:00">16:00 — svačinka a kafe ☕</option>
+        <option value="16:00">16:00 — snack a kafe</option>
         <option value="17:00">17:00 — ještě za světla, kulturně</option>
         <option value="18:00">18:00 — rozumný člověk</option>
-        <option value="19:00">19:00 — tady bych to viděl já 😏</option>
+        <option value="19:00">19:00 — pozorovat západ slunce? </option>
         <option value="20:00">20:00 — někdo to rád protáhne</option>
-        <option value="21:00">21:00 — to už mě fakt chceš utahat 😄</option>
+        <option value="21:00">21:00 — že by dlouhá noc?</option>
       </select>
 
       <label class="fld">kde se sejdeme?</label>
@@ -292,9 +292,9 @@
         <span class="glabel" style="display:none;">přidej GIF</span>
         <input type="file" accept="image/*,image/gif" onchange="setMedia(this,'gif4')">
       </label>
-      <div class="confirm-text" id="confirmText">jsem rád, že jsi neřekla ne 😌</div>
+      <div class="confirm-text" id="confirmText">jsem rád, že jsi neřekla ne </div>
       <div class="summary" id="summary"></div>
-      <input class="txt" id="msgInp" placeholder="ještě něco, co bych měl vědět? 💌">
+      <input class="txt" id="msgInp" placeholder="ještě něco, co bych měl vědět?">
       <button class="next" id="sendBtn" onclick="submitForm()" style="margin-top:16px;">poslat odpověď 💌</button>
       <div id="sendStatus" style="text-align:center;font-size:14px;font-weight:600;margin-top:10px;min-height:18px;color:var(--ink-soft);"></div>
     </section>
@@ -436,10 +436,10 @@
 
   function toConfirm(){
     document.getElementById('confirmText').innerHTML=
-      'jsem rád, že jsi neřekla ne 😌<br>buď ready v <b>'+escapeHtml(state.time)+'</b>, už se těším ✨';
+      'jsem rád, že jsi neřekla ne <br>buď ready v <b>'+escapeHtml(state.time)+'</b>, už se těším ✨';
     document.getElementById('summary').innerHTML=
-      '📓 <b>'+escapeHtml(state.day)+'</b> v <b>'+escapeHtml(state.time)+'</b><br>'+
-      '🎈 jdeme na <b>'+escapeHtml(state.activity)+'</b>';
+      '📅 <b>'+escapeHtml(state.day)+'</b> v <b>'+escapeHtml(state.time)+'</b><br>'+
+      'v plánu je <b>'+escapeHtml(state.activity)+'</b>';
     go('s4');
   }
   function escapeHtml(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
@@ -468,17 +468,17 @@
       });
       if(r.ok){
         st.style.color="var(--rose)";
-        st.textContent="odesláno 💌 brzy se ozve!";
+        st.textContent="odesláno 💌 brzy se ozvu!";
         btn.textContent="hotovo ✨";
         heartBurst();
       }else{
         st.style.color="#c0392b";
-        st.textContent="hups, nepovedlo se odeslat – zkus to znovu";
+        st.textContent="whoops, nepovedlo se odeslat – zkus to znovu";
         btn.disabled=false;
       }
     }catch(e){
       st.style.color="#c0392b";
-      st.textContent="bez internetu to nepošlu – zkontroluj připojení";
+      st.textContent="bez internetu to nejde poslat – zkontroluj připojení";
       btn.disabled=false;
     }
   }
